@@ -1,6 +1,7 @@
-  
+
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RockInSenai_ARKDREAL.Models
 {
@@ -14,38 +15,51 @@ namespace RockInSenai_ARKDREAL.Models
 
         private const string PATH = "Database/usuario.csv";
 
+        [TempData]
+        public string Mensagem { get; set; }
+
+        public virtual bool Logar(string Email, string Senha)
+        {
+            bool entrar = false;
+            List<string> csv = Musico.ReadAllLinesCSV("Database/Jogador.csv");
+
+            var logado =
+            csv.Find(
+            x =>
+             x.Split(";")[0] == Email &&
+             x.Split(";")[1] == Senha
+        );
+
+            if (logado != null)
+            {
+                entrar = true;
+               // Mensagem = "Dados incorretos, tente novamente...";//
+                return entrar;
+            }
+            return entrar;
+        }
         public Usuario()
         {
             CriarPastaEArquivo(PATH);
+
         }
 
-        public virtual bool Logar(){
-            bool logado = false;
-            return logado;
-        }
-        
-        public void CriarPastaEArquivo(string _caminho){
 
-            string pasta   = _caminho.Split("/")[0];
 
-            if(!Directory.Exists(pasta)){
+        public void CriarPastaEArquivo(string _caminho)
+        {
+
+            string pasta = _caminho.Split("/")[0];
+
+            if (!Directory.Exists(pasta))
+            {
                 Directory.CreateDirectory(pasta);
             }
 
-            if(!File.Exists(_caminho)){
+            if (!File.Exists(_caminho))
+            {
                 File.Create(_caminho).Close();
             }
-        }
-
-        public void Create(Usuario u)
-        {
-            string[] linha = { PrepararLinha(u) };
-            File.AppendAllLines(PATH, linha);
-        }
-
-        private string PrepararLinha(Usuario u)
-        {
-            return $"{u.Nome};{u.Email};{u.Senha};";
         }
 
         public List<Usuario> LerTodas()
@@ -61,7 +75,7 @@ namespace RockInSenai_ARKDREAL.Models
                 jogador.Senha = linha[0];
                 jogador.Nome = linha[1];
                 jogador.Email = linha[2];
-              
+
 
                 jogadores.Add(jogador);
             }
