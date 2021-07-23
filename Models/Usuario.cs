@@ -21,7 +21,7 @@ namespace RockInSenai_ARKDREAL.Models
         public virtual bool Logar(string Email, string Senha)
         {
             bool entrar = false;
-            List<string> csv = Musico.ReadAllLinesCSV("Database/Jogador.csv");
+            List<string> csv = Usuario.ReadAllLinesCSV(PATH);
 
             var logado =
             csv.Find(
@@ -80,6 +80,20 @@ namespace RockInSenai_ARKDREAL.Models
                 jogadores.Add(jogador);
             }
             return jogadores;
+        }
+
+          internal static List<string> ReadAllLinesCSV(string v)
+        {
+             List<string> linhas = new List<string>();
+            using(StreamReader file = new StreamReader(PATH))
+            {
+                string linha;
+                while((linha = file.ReadLine()) != null)
+                {
+                    linhas.Add(linha);
+                }
+            }
+            return linhas;
         }
     }
 }

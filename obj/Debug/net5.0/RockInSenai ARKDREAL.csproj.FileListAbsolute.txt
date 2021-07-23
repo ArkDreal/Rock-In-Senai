@@ -36,3 +36,4 @@ C:\Users\dev\Desktop\RockInSenai ARKDREAL\obj\Debug\net5.0\ref\RockInSenai ARKDR
 C:\Users\dev\Desktop\RockInSenai ARKDREAL\obj\Debug\net5.0\RockInSenai ARKDREAL.pdb
 C:\Users\dev\Desktop\RockInSenai ARKDREAL\obj\Debug\net5.0\RockInSenai ARKDREAL.genruntimeconfig.cache
 C:\Users\dev\Desktop\RockInSenai ARKDREAL\obj\Debug\net5.0\RockInSenai ARKDREAL.csproj.CopyComplete
+C:\Users\dev\Desktop\RockInSenai ARKDREAL\obj\Debug\net5.0\Razor\Views\Login\Index.cshtml.g.cs

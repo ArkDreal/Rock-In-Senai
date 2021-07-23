@@ -6,12 +6,38 @@ namespace RockInSenai_ARKDREAL.Models
 {
     public class Musico : Usuario
     {
-        public int OMB{ get; set; }
+        public int OMB { get; set; }
         private const string PATH = "Database/musico.csv";
 
         public override bool Logar(string Email, string Senha)
         {
-            return
+            List<string> csv = Musico.ReadAllLinesCSV("Database/musico.csv");
+
+            var logado =
+          csv.Find(
+              x =>
+              x.Split(";")[1] == Email &&
+              x.Split(";")[2] == Senha
+
+          );
+
+            if (logado == null)
+            {
+                logado =
+                csv.Find(
+                x =>
+                x.Split(";")[3] == Email &&
+                x.Split(";")[2] == Senha
+
+                );
+            }
+
+            if (logado == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private string PrepararLinha(Musico m)
@@ -26,7 +52,16 @@ namespace RockInSenai_ARKDREAL.Models
 
         internal static List<string> ReadAllLinesCSV(string v)
         {
-            throw new NotImplementedException();
+            List<string> linhas = new List<string>();
+            using (StreamReader file = new StreamReader(PATH))
+            {
+                string linha;
+                while ((linha = file.ReadLine()) != null)
+                {
+                    linhas.Add(linha);
+                }
+            }
+            return linhas;
         }
     }
 

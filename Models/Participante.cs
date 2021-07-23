@@ -13,7 +13,7 @@ namespace RockInSenai_ARKDREAL.Models
         }
         public void ConfirmarChegada(string ConfirmarChegada)
         {
-
+            
         }
 
         private string PrepararLinha(Participante p)
